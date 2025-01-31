@@ -38,9 +38,7 @@ async function reset()
 
         if (message.content.toLowerCase().startsWith("ditto, ")) 
         {
-          console.log(person);
           const split = message.content.toLowerCase().split("ditto, ");
-          console.log(split);
           if (split.length > 1) {
             const question = split[1].trim();
             if (question.length > 0) {
@@ -69,7 +67,6 @@ async function reset()
                 const result = await chatSession.sendMessage("Pretend as though you are " + person + ". Response to this in a couple paragraphs (without assuming their gender)" + question);
 
                 let response = result.response.text().toString().trim();
-                //console.log(response);
                 
                 await message.channel.send(`${response}`);
               } 
@@ -87,7 +84,6 @@ async function reset()
           if(commandQuery.length > 0)
           {
             person = commandQuery;
-            //console.log(person);
 
             try{
               client.user.setPresence({
