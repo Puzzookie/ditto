@@ -64,7 +64,7 @@ async function reset()
                   ],
                 });
 
-                const result = await chatSession.sendMessage("Pretend as though you are " + person + ". Response to this in a couple paragraphs (without assuming their gender)" + question);
+                const result = await chatSession.sendMessage("Pretend as though you are " + person + ". Respond to this in a paragraph or two (without assuming their gender)" + question);
 
                 let response = result.response.text().toString().trim();
                 
