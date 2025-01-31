@@ -1,0 +1,17 @@
+{
+  "name": "sister-price",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "discord.js": "^14.17.3",
+    "express": "^4.21.1"
+  }
+}
