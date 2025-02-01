@@ -34,7 +34,7 @@ async function handleInteraction(interaction) {
     try {
 
       const { commandName, options } = interaction;
-      let person = options.getString("into");
+      person = options.getString("into");
       
       client.user.setPresence({
         activities: [{ name: "I'm " + person, type: ActivityType.Custom }],
@@ -42,7 +42,7 @@ async function handleInteraction(interaction) {
       });
       
       await interaction.reply({
-        content: `Successfully transformed into ${person}`,
+        content: `Successfully transformed into '${person}'`,
         ephemeral: true
       });
     }
