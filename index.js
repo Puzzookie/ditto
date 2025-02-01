@@ -29,10 +29,42 @@ app.get('/', async (req, res) => {
   }
 });
 
+async function handleInteraction(interaction) {
+  
+    try {
+
+      const { commandName, options } = interaction;
+      let person = options.getString("into");
+      
+      client.user.setPresence({
+        activities: [{ name: "I'm " + person, type: ActivityType.Custom }],
+        status: 'online',
+      });
+      
+      await interaction.reply({
+        content: `Successfully transformed into ${person}`,
+        ephemeral: true
+      });
+    }
+    catch (error) {
+      await interaction.reply({
+          content: `Try again later`,
+          ephemeral: true
+      });
+    }
+}
+
 async function reset()
 {     
-
-
+  client.on(Events.InteractionCreate, async interaction => {
+        if(!interaction.isCommand()) 
+        {
+            return;
+        }
+    
+        await handleInteraction(interaction);
+    });
+  
     client.on(Events.MessageCreate, async message => { 
         if (message.author.bot) return;
 
@@ -75,25 +107,6 @@ async function reset()
                   await message.channel.send(`Try again later`);
               }
 
-            }
-          }
-        }
-        else if(message.content.toLowerCase().startsWith('$'))
-        {
-          const commandQuery = message.content.toLowerCase().slice(1).trim();
-          if(commandQuery.length > 0)
-          {
-            person = commandQuery;
-
-            try{
-              client.user.setPresence({
-                activities: [{ name: "I'm " + person, type: ActivityType.Custom }],
-                status: 'online',
-              });
-            }
-            catch(err)
-            {
-              console.log(err);
             }
           }
         }
