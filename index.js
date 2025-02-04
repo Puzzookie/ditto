@@ -29,6 +29,13 @@ app.get('/', async (req, res) => {
   }
 });
 
+function setPerson(_person)
+{
+  client.user.setPresence({
+    activities: [{ name: "I'm " + _person, type: ActivityType.Custom }],
+    status: 'online',
+  });
+}
 async function handleInteraction(interaction) {
   
     try {
@@ -45,8 +52,7 @@ async function handleInteraction(interaction) {
       }
       else
       {
-          client.user.setUsername(person);
-          
+          setPerson(person);      
           await interaction.reply({
             content: `Transformed into '${person}' successfully`,
           });
@@ -106,7 +112,7 @@ async function reset()
 
                 let response = result.response.text().toString().trim();
                 
-                await message.channel.send(`${response}`);
+                await message.channel.send(`${person}: ${response}`);
               } 
               catch (error) {
                   console.log(`An error occurred. Try again later`);
@@ -118,7 +124,8 @@ async function reset()
         }
     });
     
-    await client.login(process.env.DISCORD_TOKEN);    
+    await client.login(process.env.DISCORD_TOKEN);   
+    setPerson(person);
 }
 
 await reset();
