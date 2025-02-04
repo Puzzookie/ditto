@@ -106,7 +106,7 @@ async function reset()
 
                 let response = result.response.text().toString().trim();
                 
-                await message.channel.send(`${person}: ${response}`);
+                await message.channel.send(`${response}`);
               } 
               catch (error) {
                   console.log(`An error occurred. Try again later`);
