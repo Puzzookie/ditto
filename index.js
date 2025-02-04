@@ -35,15 +35,22 @@ async function handleInteraction(interaction) {
 
       const { commandName, options } = interaction;
       person = options.getString("into");
-      
-      client.user.setPresence({
-        activities: [{ name: "I'm " + person, type: ActivityType.Custom }],
-        status: 'online',
-      });
-      
-      await interaction.reply({
-        content: `Transformed into '${person}' successfully`,
-      });
+
+      if(person.length > 32)
+      {
+          await interaction.reply({
+            content: `Unable to transform into ${person} because it exceeds the 32 character limit`,
+            ephemeral: true
+          });
+      }
+      else
+      {
+          client.user.setUsername(person);
+          
+          await interaction.reply({
+            content: `Transformed into '${person}' successfully`,
+          });
+      }
     }
     catch (error) {
       await interaction.reply({
