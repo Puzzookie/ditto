@@ -13,7 +13,7 @@ let client = new Client({
 const app = express();
 const port = process.env.PORT || 3000;
 
-let person = "";
+let person = "Ditto";
 
 app.use(express.json()); // For parsing JSON bodies
 
@@ -42,13 +42,12 @@ async function handleInteraction(interaction) {
       });
       
       await interaction.reply({
-        content: `Successfully transformed into '${person}'`,
-        ephemeral: true
+        content: `Transformed into '${person}' successfully`,
       });
     }
     catch (error) {
       await interaction.reply({
-          content: `Try again later`,
+          content: `An error occurred. Try again later`,
           ephemeral: true
       });
     }
@@ -100,11 +99,11 @@ async function reset()
 
                 let response = result.response.text().toString().trim();
                 
-                await message.channel.send(`${response}`);
+                await message.channel.send(`${person}: ${response}`);
               } 
               catch (error) {
-                  console.log(error);
-                  await message.channel.send(`Try again later`);
+                  console.log(`An error occurred. Try again later`);
+                  await message.channel.send(`An error occurred. Try again later`);
               }
 
             }
